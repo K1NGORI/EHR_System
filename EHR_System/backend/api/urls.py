@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from .views import CurrentUserView
 from .views import (
     MedicalRecordViewSet,
     PatientViewSet,
@@ -17,8 +18,9 @@ router.register(r'labtests', LabTestViewSet)
 router.register(r'labresults', LabResultViewSet)
 router.register(r'prescriptions', PrescriptionViewSet)
 router.register(r'medicalrecords', MedicalRecordViewSet)
-
+# The CurrentUserView is a custom view to get the current logged-in user
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('user/', CurrentUserView.as_view(), name='current-user'),
 ]

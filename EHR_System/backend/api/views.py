@@ -82,3 +82,14 @@ class PrescriptionViewSet(viewsets.ModelViewSet):
             patient_id=self.request.data.get('patient_id'),
             doctor_id=self.request.data.get('doctor_id')
         )
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .serializers import UserSerializer # Make sure UserSerializer is imported
+
+class CurrentUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
