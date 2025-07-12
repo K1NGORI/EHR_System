@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
     # Your local apps
     'api',
-] # <-- MAKE SURE THIS CLOSING BRACKET IS HERE
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

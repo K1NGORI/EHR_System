@@ -1,16 +1,16 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import CurrentUserView
+# Import ALL your views, including the new one
 from .views import (
-    MedicalRecordViewSet,
     PatientViewSet,
     AppointmentViewSet,
     LabTestViewSet,
     LabResultViewSet,
-    PrescriptionViewSet
+    PrescriptionViewSet,
+    MedicalRecordViewSet,
+    CurrentUserView
 )
 
-# The router automatically generates URL patterns for our ViewSets
 router = DefaultRouter()
 router.register(r'patients', PatientViewSet)
 router.register(r'appointments', AppointmentViewSet)
@@ -18,9 +18,9 @@ router.register(r'labtests', LabTestViewSet)
 router.register(r'labresults', LabResultViewSet)
 router.register(r'prescriptions', PrescriptionViewSet)
 router.register(r'medicalrecords', MedicalRecordViewSet)
-# The CurrentUserView is a custom view to get the current logged-in user
 
+# This defines the URL for the new view
 urlpatterns = [
-    path('', include(router.urls)),
     path('user/', CurrentUserView.as_view(), name='current-user'),
+    path('', include(router.urls)),
 ]
